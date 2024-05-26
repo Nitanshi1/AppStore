@@ -1,0 +1,28 @@
+.form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .text-danger {
+    font-size: 0.875em;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .mt-3 {
+    margin-top: 1rem;
+  }
+  
+  .p-4 {
+    padding: 1.5rem;
+  }
+  
+  .border {
+    border: 1px solid #dee2e6;
+  }
+  
+  .rounded {
+    border-radius: 0.25rem;
+  }
+

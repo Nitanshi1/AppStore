@@ -1,0 +1,74 @@
+
+<body><div class="container mt-5">
+    <h2 class="text-center mb-4" >Create Form</h2>
+    <form [formGroup]="appCreateForm" (ngSubmit)="onSubmit()" class="p-4 border rounded">
+    <div class="form-group">
+      <label for="appName">App Name</label>
+      <input id="appName" formControlName="appName" class="form-control" />
+      <div *ngIf="appName?.invalid && (appName?.dirty || appName?.touched)" class="text-danger">
+        <small *ngIf="appName?.errors?.['required']">App Name is required.</small>
+        <small *ngIf="appName?.errors?.['minlength']">App Name must be at least 3 characters long.</small>
+        <small *ngIf="appName?.errors?.['maxlength']">App Name cannot be more than 50 characters long.</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input id="description" formControlName="description" class="form-control" />
+      <div *ngIf="description?.invalid && (description?.dirty || description?.touched)" class="text-danger">
+        <small *ngIf="description?.errors?.['required']">Description is required.</small>
+        <small *ngIf="description?.errors?.['minlength']">Description must be at least 10 characters long.</small>
+        <small *ngIf="description?.errors?.['maxlength']">Description cannot be more than 200 characters long.</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="releaseDate">Release Date</label>
+      <input id="releaseDate" type="date" formControlName="releaseDate" class="form-control" />
+      <div *ngIf="releaseDate?.invalid && (releaseDate?.dirty || releaseDate?.touched)" class="text-danger">
+        <small *ngIf="releaseDate?.errors?.['required']">Release Date is required.</small>
+      </div>
+    </div>
+   
+  
+    <div class="form-group">
+      <label for="version">Version</label>
+      <input id="version" formControlName="version" class="form-control" />
+      <div *ngIf="version?.invalid && (version?.dirty || version?.touched)" class="text-danger">
+        <small *ngIf="version?.errors?.['required']">Version is required.</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="genre">Genre</label>
+      <select id="genre" formControlName="genre" class="form-control">
+        <option value="" disabled>Select a genre</option>
+        <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+      </select>
+      <div *ngIf="genre?.invalid && (genre?.dirty || genre?.touched)" class="text-danger">
+        <small *ngIf="genre?.errors?.['required']">Genre is required.</small>
+      </div>
+    </div>
+  
+    <div class="form-check">
+      <input id="visibility" type="checkbox" formControlName="visibility" class="form-check-input" />
+      <label for="visibility" class="form-check-label">Visibility</label>
+      <div *ngIf="visibility?.invalid && (visibility?.dirty || visibility?.touched)" class="text-danger">
+        <small *ngIf="visibility?.errors?.['required']">Visibility is required.</small>
+      </div>
+    </div>
+  
+    <div class="text-center mt-3">
+      <button type="submit" class="btn btn-secondary" [disabled]="!appCreateForm.valid || appCreateForm.pristine" >Add Data!</button>
+    </div>
+
+
+
+
+ <ng-template [ngIf]="show">-
+    <ngb-toast header="Click my close icon →" [autohide]="false" (hidden)="close()">
+      Application created successfully!
+    </ngb-toast>
+  </ng-template>
+  
+

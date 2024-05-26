@@ -1,0 +1,24 @@
+.custom-carousel-img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px; /* Adjust the height as needed */
+    overflow: hidden;
+    background-color: #000; /* Background color to blend with the images */
+  }
+  
+  .custom-carousel-img {
+    max-height: 100%;
+    width: auto;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  .carousel-caption h3 {
+    font-size: 1.5rem; /* Adjust the font size as needed */
+  }
+  
+  .carousel-caption p {
+    font-size: 1rem; /* Adjust the font size as needed */
+  }
+  

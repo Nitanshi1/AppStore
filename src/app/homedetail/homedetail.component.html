@@ -1,0 +1,54 @@
+<div class="container mt-5">
+    <h2>Details</h2>
+  
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text">
+          <strong>User_Id:</strong> {{ app?.user_id }}
+        </p>
+        <p class="card-text">
+          <strong>App Name:</strong> {{ app?.app_Name }}
+        </p>
+        <p class="card-text">
+          <strong>Description:</strong> {{ app?.description }}
+        </p>
+        <p class="card-text">
+          <strong>Release Date:</strong> {{ app?.releaseDate }}
+        </p>
+        <p class="card-text">
+          <strong>Version:</strong> {{ app?.version }}
+        </p>
+        <p class="card-text"><strong>Genre:</strong> {{ app?.genre }}</p>
+        <p class="card-text">
+          <strong>Visibility:</strong> {{ app?.visibility }}
+        </p>
+        <p class="card-text">
+          <strong>AverageRating:</strong>
+          <ngb-rating
+            [rate]="app?.averageRating || 0"
+            [readonly]="true"
+          ></ngb-rating>
+        </p>
+  
+        <button type="button" class="btn btn-secondary" (click)="goback()">
+          Back
+        </button>
+        <br /><br />
+        <ng-container *ngIf="app?.comments?.length">
+          <ngb-carousel>
+            <ng-template ngbSlide *ngFor="let comment of app?.comments; let i = index">
+              <div class="picsum-img-wrapper custom-carousel-img-wrapper">
+                <img [src]="images[i % images.length]" alt="Comment slide" class="custom-carousel-img" />
+              </div>
+              <div class="carousel-caption d-none d-md-block">
+                <h3>{{ comment.user_id }}</h3>
+                <p>{{ comment.content }}</p>
+                <ngb-rating [rate]="comment.rating" [readonly]="true"></ngb-rating>
+              </div>
+            </ng-template>
+          </ngb-carousel>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,83 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-3">Update Form</h2>
+    <div class="card shadow p-4" style="background-color: #dce3ea;">
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <div class="mb-3">
+          <label for="appNameInput" class="form-label">App Name:</label>
+          <input type="text" readonly class="form-control-plaintext" class="form-control" id="appNameInput" formControlName="appName">
+          <div *ngIf="appname?.invalid && (appname?.dirty || appname?.touched)" class="text-danger">
+            <div *ngIf="appname?.errors?.['required']">App Name is required.</div>
+            <div *ngIf="appname?.errors?.['minlength']">App Name must be at least 3 characters long.</div>
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="descriptionTextarea" class="form-label">Description:</label>
+          <textarea class="form-control" id="descriptionTextarea" formControlName="description" rows="3"></textarea>
+          <div *ngIf="description?.invalid && (description?.dirty || description?.touched)" class="text-danger">
+            <div *ngIf="description?.errors?.['required']">Description is required.</div>
+            <div *ngIf="description?.errors?.['minlength']">Description must be at least 10 characters long.</div>
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="versionInput" class="form-label">Version:</label>
+          <input type="text" class="form-control" id="versionInput" formControlName="version">
+          <div *ngIf="version?.invalid && (version?.dirty || version?.touched)" class="text-danger">
+            <div *ngIf="version?.errors?.['required']">Version is required.</div>
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="releaseDateInput" class="form-label">Release Date:</label>
+          <input readonly class="form-control-plaintext" class="form-control" id="releaseDateInput" formControlName="releaseDate">
+          <div *ngIf="releaseDate?.invalid && (releaseDate?.dirty || releaseDate?.touched)" class="text-danger">
+            <div *ngIf="releaseDate?.errors?.['invalidReleaseDate']">Release date must be before today.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="DownloadCount" class="form-label">DownloadCount:</label>
+          <input type="text"readonly class="form-control-plaintext" class="form-control" id="DownloadCount" formControlName="DownloadCount">
+          <div *ngIf="DownloadCount?.invalid && (DownloadCount?.dirty ||DownloadCount?.touched)" class="text-danger">
+           
+        </div>
+        <div class="mb-3">
+          <label for="avgRating" class="form-label">Average Rating:</label>
+          <input type="text" readonly class="form-control-plaintext" class="form-control" id="avgRating" formControlName="avgRating">
+          <div *ngIf="avgRating?.invalid && (avgRating?.dirty || avgRating?.touched)" class="text-danger">
+          
+        </div>
+        <div class="mb-3">
+          <label for="genreSelect" class="form-label">Genre:</label>
+          <select class="form-select" id="genreSelect" formControlName="genre">
+            <option value="" disabled selected>Select genre</option>
+            <option value="Social">Social</option>
+            <option value="Games">Games</option>
+            <option value="Health">Health</option>
+            <option value="Women Interest">Women Interest</option>
+          </select>
+          <div *ngIf="genre?.invalid && (genre?.dirty || genre?.touched)" class="text-danger">
+            <div *ngIf="genre?.errors?.['required']">Genre is required.</div>
+          </div>
+        </div>
+
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Visibility</label>
+        </div>
+  
+        <div class="text-center">
+          <button type="submit" class="btn btn-secondary" [disabled]="!form.valid">Update Data</button>
+        </div>
+
+    </div>
+    <button type="button" class="btn btn-secondary" (click)="goback()">
+      Back
+    </button>
+  
+    <ngb-toast *ngIf="show" header="Update Successful" [autohide]="autohide" (hidden)="close()" class="bg-success text-light">
+      Application updated successfully!
+    </ngb-toast>
+ 
+  
