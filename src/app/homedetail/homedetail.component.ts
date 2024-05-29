@@ -1,25 +1,27 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { HomeService } from '../home.service';
 import { ActivatedRoute } from '@angular/router';
 import { AppData } from '../myapplication';
 import { NgbCarouselModule, NgbRatingModule, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
+import { CommentData } from '../mycomment';
 
 @Component({
   selector: 'app-homedetail',
   standalone: true,
-  imports: [NgIf, NgFor, FormsModule, NgbRatingModule, NgbCarouselModule],
+  imports: [NgIf, NgFor, ReactiveFormsModule, NgbRatingModule, NgbCarouselModule],
   templateUrl: './homedetail.component.html',
   styleUrls: ['./homedetail.component.css']
 })
 export class HomedetailComponent implements OnInit {
-
-  images: string[] = []; 
+  commentform!: FormGroup;
+  images: string[] = [];
   app?: AppData;
 
   constructor(
+    private fb: FormBuilder,
     private homeservice: HomeService,
     private route: ActivatedRoute,
     private location: Location,
@@ -31,16 +33,17 @@ export class HomedetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getallappdetails();
-    this.loadImages(); 
+    this.loadImages();
+    this.commentform = this.fb.group({
+      commentStatement: [''],
+      rating: ['']
+    });
   }
 
   getallappdetails(): void {
     const id1 = Number(this.route.snapshot.paramMap.get('id'));
-    this.homeservice
-      .getallappdetails(id1)
-      .subscribe((app) => (this.app = app));
+    this.homeservice.getallappdetails(id1).subscribe((app) => (this.app = app));
   }
-
 
   goback(): void {
     this.location.back();
@@ -53,5 +56,24 @@ export class HomedetailComponent implements OnInit {
       'https://picsum.photos/id/238/900/500',
       'https://picsum.photos/id/239/900/500'
     ];
+  }
+
+  addcomment(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.homeservice.addcomment(this.commentform.value as CommentData, id).subscribe((comment) => {
+        console.log(comment);
+        this.getallappdetails();  // Update app details after adding a comment
+      });
+    }
+    this.commentform.reset();
+  }
+
+  deletecomment(id: string): void {
+    if (id) {
+      this.homeservice.deletecomment(id).subscribe(() => {
+        this.getallappdetails();  // Update app details after deleting a comment
+      });
+    }
   }
 }

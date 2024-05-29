@@ -1,0 +1,81 @@
+<div class="text-danger" *ngIf="printdata">{{printdata}}</div>
+<section class="py-5 py-lg-8">
+    <div class="container">
+       <div class="row">
+          <div class="col-xl-4 offset-xl-4 col-md-12 col-12">
+             <div class="text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                  </svg>
+                <h1 class="mb-1">Create Account</h1>
+                <p class="mb-0">Sign up now and get free account instant.</p>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <div class="row justify-content-center mb-6">
+    <div class="col-xl-5 col-lg-6 col-md-8 col-12">
+       <div class="card shadow-sm mb-3">
+          <div class="card-body">
+             <form class="needs-validation mb-6" [formGroup]="signin" (ngSubmit)="submit()">
+                
+
+                <div class="mb-3 form-group">
+                   <label for="signupEmailInput" class="form-label">
+                      Email
+                      <span class="text-danger">*</span>
+                   </label>
+                   <input type="email" class="form-control" id="signupEmailInput"  formControlName="email" [class.is-invalid]="email?.invalid && email?.touched" >
+                   <div *ngIf="email?.invalid && email?.touched">
+                    <span class="text-danger">Please Enter Your Email</span>
+                   </div>
+                </div>
+                <div class="mb-3 form-group">
+                   <label for="formSignUpPassword" class="form-label">Password
+                    <span class="text-danger">*</span>
+                   </label>
+                   <div class="password-field position-relative">
+                      <input type="password" class="form-control fakePassword" id="formSignUpPassword"  formControlName="password" [class.is-invalid]="password?.invalid && password?.touched" >
+                      <span><i class="bi bi-eye-slash passwordToggler"></i></span>
+                      <div *ngIf="password?.invalid && password?.touched">
+                        <span class="text-danger">Please Enter The Password</span>
+                      </div>
+                   </div>
+                </div>
+                <div class="mb-3 form-group">
+                  <label for="genre" class="col-sm-2 col-form-label">Role
+                     <span class="text-danger">*</span>
+                  </label>
+                  <div class="col-sm-12">
+                      <select class="form-select" aria-label="Default select example" formControlName="role" [class.is-invalid]="role?.invalid && role?.touched">
+                        <option disabled>Select Your Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                        
+                      </select>
+                      <div *ngIf="role?.invalid && role?.touched">
+                        <span class="text-danger">Please Select Your Role</span>
+                      </div>
+                  </div>
+                </div>
+                
+
+                <div class="d-grid">
+                   <button class="btn btn-primary" type="submit" [disabled]="signin.invalid">Sign Up</button>
+                </div>
+             </form>
+             <span>
+               Already have an account?
+               <a routerLink="/login" class="text-primary">Sign in here.</a>
+            </span>
+             
+             
+             
+          </div>
+       </div>
+
+      
+    </div>
+ </div>
